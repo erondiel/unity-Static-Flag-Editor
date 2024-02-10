@@ -1,5 +1,5 @@
 // Static Check
-// (c) 2024 Rodrigo Camacho / Mauricio
+// (c) 2024 Rodrigo Camacho / Mauricio Tonelli
 // Public domain, do with whatever you like, commercial or not
 // This comes with no warranty, use at your own risk!
 // https://github.com/erondiel/unity-Static-Flag-Editor
