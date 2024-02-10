@@ -1,7 +1,14 @@
-using UnityEngine;
+// Static Check
+// (c) 2024 Rodrigo Camacho / Mauricio
+// Public domain, do with whatever you like, commercial or not
+// This comes with no warranty, use at your own risk!
+// https://github.com/erondiel/unity-Static-Flag-Editor
+
+
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq; // Ensure you have this for the ToList() method
+
 public class NonStaticObjectsWindow : EditorWindow
 {
     private Vector2 scrollPosition;
@@ -11,14 +18,13 @@ public class NonStaticObjectsWindow : EditorWindow
     private bool showAllObjects = false; // False by default, showing only missing flags
     private bool isSortedAlphabetically = false;
 
-
-
     [MenuItem("Window/Level Design/Static Tag Editor")] // Add menu item to the Window menu
     static void Init()
     {
         NonStaticObjectsWindow window = (NonStaticObjectsWindow)EditorWindow.GetWindow(typeof(NonStaticObjectsWindow)); // Get existing open window or if none, make a new one:
         window.Show();
     }
+
     void OnGUI()
     {
         DrawDescription();
@@ -26,7 +32,6 @@ public class NonStaticObjectsWindow : EditorWindow
         DrawActionButtons();
         DrawNonStaticObjectsList();
     }
-
 
     void DrawDescription()
     {
@@ -148,8 +153,7 @@ public class NonStaticObjectsWindow : EditorWindow
             }
         }
 
-        // Apply sorting if the list was previously sorted alphabetically
-        if (isSortedAlphabetically)
+        if (isSortedAlphabetically) // Apply sorting if the list was previously sorted alphabetically
         {
             SortNonStaticObjectsAlphabetically();
         }
@@ -168,11 +172,9 @@ public class NonStaticObjectsWindow : EditorWindow
         }
         GameObjectUtility.SetStaticEditorFlags(obj, currentFlags);
 
-        // Refresh the window to show the updated flags, respecting the current filter mode
-        FindNonStaticObjects(showAllObjects);
+        FindNonStaticObjects(showAllObjects); / Refresh the window to show the updated flags, respecting the current filter mode
 
-        // Repaint the window to reflect the changes
-        Repaint();
+        Repaint(); / Repaint the window to reflect the changes
     }
 
     string GetTooltipForFlag(StaticEditorFlags flag)
@@ -198,6 +200,7 @@ public class NonStaticObjectsWindow : EditorWindow
                 return "No description available.";
         }
     }
+
     bool AreAllFlagsSet(StaticEditorFlags flags)
     {
         // Check if all flags are set
@@ -216,25 +219,21 @@ public class NonStaticObjectsWindow : EditorWindow
 
         if (set)
         {
-            // Set all flags
-            GameObjectUtility.SetStaticEditorFlags(obj, allFlags);
+            GameObjectUtility.SetStaticEditorFlags(obj, allFlags); // Set all flags
         }
         else
         {
-            // Clear all flags
-            GameObjectUtility.SetStaticEditorFlags(obj, 0);
+            GameObjectUtility.SetStaticEditorFlags(obj, 0); // Clear all flags
         }
 
-        // Refresh the window to show the updated flags, respecting the current filter mode
-        FindNonStaticObjects(showAllObjects);
+        FindNonStaticObjects(showAllObjects); // Refresh the window to show the updated flags, respecting the current filter mode
 
-        // Apply sorting if the list was previously sorted alphabetically
-        if (isSortedAlphabetically)
+        if (isSortedAlphabetically) // Apply sorting if the list was previously sorted alphabetically
+
         {
             SortNonStaticObjectsAlphabetically();
         }
 
-        // Repaint the window to reflect the changes
-        Repaint();
+        Repaint();  // Repaint the window to reflect the changes
     }
 }
