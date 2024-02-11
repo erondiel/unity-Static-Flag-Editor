@@ -101,11 +101,19 @@ public class NonStaticObjectsWindow : EditorWindow
             SetAllFlags(pair.Key, setAllFlags);
         }
 
+        var addedFlags = new HashSet<StaticEditorFlags>();
+
         // Individual flag toggles
         foreach (StaticEditorFlags flag in System.Enum.GetValues(typeof(StaticEditorFlags)))
         {
+            //Debug.Log(flag);
+            if (addedFlags.Contains(flag))
+                continue; 
+            
+            addedFlags.Add(flag);
+
             bool currentFlagSet = (pair.Value & flag) == flag;
-            string flagName = flag.ToString().Replace("Static", ""); // Remove the "Static" suffix from the flag name
+            string flagName = flag.ToString().Replace("Static", "");
             GUIContent flagContent = new GUIContent(flagName, GetTooltipForFlag(flag));
             bool newFlagSet = GUILayout.Toggle(currentFlagSet, flagContent, GUILayout.Width(flagToggleWidth));
             if (newFlagSet != currentFlagSet)
@@ -138,7 +146,7 @@ public class NonStaticObjectsWindow : EditorWindow
         foreach (GameObject obj in FindObjectsOfType<GameObject>())
         {
             StaticEditorFlags flags = GameObjectUtility.GetStaticEditorFlags(obj);
-            if (includeAll || // Include all if includeAll is true
+            if (includeAll ||
                 (flags & StaticEditorFlags.BatchingStatic) == 0 ||
                 (flags & StaticEditorFlags.OccludeeStatic) == 0 ||
                 (flags & StaticEditorFlags.OccluderStatic) == 0 ||
