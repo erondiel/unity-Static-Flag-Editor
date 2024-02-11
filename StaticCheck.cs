@@ -5,6 +5,7 @@
 // https://github.com/erondiel/unity-Static-Flag-Editor
 
 
+using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Linq; // Ensure you have this for the ToList() method
@@ -172,9 +173,9 @@ public class NonStaticObjectsWindow : EditorWindow
         }
         GameObjectUtility.SetStaticEditorFlags(obj, currentFlags);
 
-        FindNonStaticObjects(showAllObjects); / Refresh the window to show the updated flags, respecting the current filter mode
+        FindNonStaticObjects(showAllObjects); // Refresh the window to show the updated flags, respecting the current filter mode
 
-        Repaint(); / Repaint the window to reflect the changes
+        Repaint(); // Repaint the window to reflect the changes
     }
 
     string GetTooltipForFlag(StaticEditorFlags flag)
